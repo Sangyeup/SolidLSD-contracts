@@ -28,3 +28,6 @@ build
 scripts/xbribes
 # for verify
 Flattened.sol
+
+gitsubmodules.sh
+.DS_Store

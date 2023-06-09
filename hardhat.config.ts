@@ -27,24 +27,12 @@ const config: HardhatUserConfig = {
     hardhat: {
       initialBaseFeePerGas: 0,
       forking: {
-        url: `https://opt-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
+        url: `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_GOERLI_API_KEY}`,
         blockNumber: 16051852
       }
     },
-    opera: {
-      url: "https://rpc.fantom.network",
-      accounts: [process.env.PRIVATE_KEY!],
-    },
-    ftmTestnet: {
-      url: "https://rpc.testnet.fantom.network",
-      accounts: [process.env.PRIVATE_KEY!],
-    },
-    optimisticEthereum: {
-      url: "https://mainnet.optimism.io",
-      accounts: [process.env.PRIVATE_KEY!],
-    },
-    optimisticKovan: {
-      url: "https://kovan.optimism.io",
+    goerli: {
+      url: `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_GOERLI_API_KEY}`,
       accounts: [process.env.PRIVATE_KEY!],
     },
   },
@@ -77,10 +65,7 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      opera: process.env.FTM_SCAN_API_KEY!,
-      ftmTestnet: process.env.FTM_SCAN_API_KEY!,
-      optimisticEthereum: process.env.OP_SCAN_API_KEY!,
-      optimisticKovan: process.env.OP_SCAN_API_KEY!,
+      goerli: process.env.ETHER_SCAN_API_KEY!,
     }
   }
 };

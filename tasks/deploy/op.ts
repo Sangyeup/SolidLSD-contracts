@@ -1,19 +1,15 @@
 import { task } from "hardhat/config";
 
-import optimismConfig from "./constants/optimismConfig";
-import testOptimismConfig from "./constants/testOptimismConfig";
+import goerliConfig from "./constants/goerliConfig";
+//import testOptimismConfig from "./constants/testOptimismConfig";
 
-import fantomConfig from "./constants/fantomConfig";
-import testFantomConfig from "./constants/testFantomConfig";
-
-task("deploy:op", "Deploys Optimism contracts").setAction(async function (
+task("deploy:goerli", "Deploys Goerli contracts").setAction(async function (
   taskArguments,
   { ethers }
 ) {
   const mainnet = false;
 
-  const OP_CONFIG = mainnet ? optimismConfig : testOptimismConfig;
-  const FTM_CONFIG = mainnet ? fantomConfig : testFantomConfig;
+  const GOERLI_CONFIG = goerliConfig;
 
   // Load
   const [
@@ -64,10 +60,10 @@ task("deploy:op", "Deploys Optimism contracts").setAction(async function (
   await pairFactory.deployed();
   console.log("PairFactory deployed to: ", pairFactory.address);
 
-  const router = await Router.deploy(pairFactory.address, OP_CONFIG.WETH);
+  const router = await Router.deploy(pairFactory.address, GOERLI_CONFIG.WETH);
   await router.deployed();
   console.log("Router deployed to: ", router.address);
-  console.log("Args: ", pairFactory.address, OP_CONFIG.WETH, "\n");
+  console.log("Args: ", pairFactory.address, GOERLI_CONFIG.WETH, "\n");
 
   const library = await Library.deploy(router.address);
   await library.deployed();
@@ -119,18 +115,18 @@ task("deploy:op", "Deploys Optimism contracts").setAction(async function (
   );
 
   const receiver = await RedemptionReceiver.deploy(
-    OP_CONFIG.USDC,
+    GOERLI_CONFIG.USDC,
     velo.address,
     FTM_CONFIG.lzChainId,
-    OP_CONFIG.lzEndpoint,
+    GOERLI_CONFIG.lzEndpoint,
   );
   await receiver.deployed();
   console.log("RedemptionReceiver deployed to: ", receiver.address);
   console.log("Args: ", 
-    OP_CONFIG.USDC,
+    GOERLI_CONFIG.USDC,
     velo.address,
     FTM_CONFIG.lzChainId,
-    OP_CONFIG.lzEndpoint,
+    GOERLI_CONFIG.lzEndpoint,
     "\n"
   );
 
@@ -184,20 +180,20 @@ task("deploy:op", "Deploys Optimism contracts").setAction(async function (
 
   // Whitelist
   const nativeToken = [velo.address];
-  const tokenWhitelist = nativeToken.concat(OP_CONFIG.tokenWhitelist);
+  const tokenWhitelist = nativeToken.concat(GOERLI_CONFIG.tokenWhitelist);
   await voter.initialize(tokenWhitelist, minter.address);
   console.log("Whitelist set");
 
   // Initial veVELO distro
   await minter.initialize(
-    OP_CONFIG.partnerAddrs,
-    OP_CONFIG.partnerAmts,
-    OP_CONFIG.partnerMax
+    GOERLI_CONFIG.partnerAddrs,
+    GOERLI_CONFIG.partnerAmts,
+    GOERLI_CONFIG.partnerMax
   );
   console.log("veVELO distributed");
 
-  await minter.setTeam(OP_CONFIG.teamMultisig)
+  await minter.setTeam(GOERLI_CONFIG.teamMultisig)
   console.log("Team set for minter");
 
-  console.log("Optimism contracts deployed");
+  console.log("Goerli contracts deployed");
 });

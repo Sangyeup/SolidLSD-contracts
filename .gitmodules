@@ -10,6 +10,7 @@
 [submodule "lib/openzeppelin-contracts"]
 	path = lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+	branch = d00acef4059807535af0bd0dd0ddf619747a044b
 [submodule "lib/LayerZero"]
 	path = lib/LayerZero
 	url = https://github.com/LayerZero-Labs/LayerZero
