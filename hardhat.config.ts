@@ -28,7 +28,7 @@ const config: HardhatUserConfig = {
       initialBaseFeePerGas: 0,
       forking: {
         url: `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_GOERLI_API_KEY}`,
-        blockNumber: 16051852
+        blockNumber: 9000000
       }
     },
     goerli: {

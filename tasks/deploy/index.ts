@@ -1,3 +1,2 @@
-import "./op.ts";
-import "./ftm.ts";
+import "./goerli.ts";
 import "./init.ts";
